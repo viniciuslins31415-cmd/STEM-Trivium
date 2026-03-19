@@ -1,0 +1,37 @@
+int sensor = 7;
+
+void setup(){
+  Serial.begin(9600);
+  pinMode(2, OUTPUT);
+  pinMode(3, OUTPUT);
+  pinMode(4, OUTPUT);
+  pinMode(5, OUTPUT);
+  pinMode(6, OUTPUT);
+}
+
+void loop(){
+  int value = digitalRead(sensor);
+  
+  if (value == HIGH) {
+    //LED1 acende e depois apaga
+  	digitalWrite(2, HIGH);
+    delay(500);
+    digitalWrite(2, LOW);
+    //LED2 acende e depois apaga
+    digitalWrite(3, HIGH);
+    delay(500);
+    digitalWrite(3, LOW);
+    //LED3 acende e depois apaga
+    digitalWrite(4, HIGH);
+    delay(500);
+    digitalWrite(4, LOW);
+    //LED4 acende e depois apaga
+    digitalWrite(5, HIGH);
+    delay(500);
+    digitalWrite(5, LOW);
+    //LED5 acende e depois apaga
+    digitalWrite(6, HIGH);
+    delay(500);
+    digitalWrite(6, LOW);
+  }
+}
