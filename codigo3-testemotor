@@ -1,0 +1,30 @@
+#include <AFMotor_R4.h>
+
+AF_DCMotor motor(1);
+
+void setup() {
+  Serial.begin(9600);
+  
+  motor.setSpeed(200); // velocidade (0 a 255)
+}
+
+void loop() {
+  // Gira para frente
+  motor.run(FORWARD);
+  Serial.println("Frente");
+  delay(3000);
+
+  // Para
+  motor.run(RELEASE);
+  Serial.println("Parado");
+  delay(2000);
+
+  // Gira para trás
+  motor.run(BACKWARD);
+  Serial.println("Reverso");
+  delay(3000);
+
+  // Para
+  motor.run(RELEASE);
+  delay(2000);
+}
