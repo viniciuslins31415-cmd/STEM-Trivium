@@ -1,0 +1,30 @@
+#include <Servo.h>
+
+Servo servoX;
+Servo servoY;
+
+void setup() {
+  servoX.attach(9);
+  servoY.attach(10);
+  Serial.begin(9600);
+}
+
+void loop() {
+  int valorX = analogRead(A2); // 0 a 1023
+  int valorY = analogRead(A3);
+
+  // Converte para ângulo (0 a 180)
+  int anguloX = map(valorX, 0, 1023, 0, 60);
+  int anguloY = map(valorY, 0, 1023, 0, 60);
+
+  servoX.write(anguloX);
+  servoY.write(anguloY);
+
+  // Debug
+  Serial.print("X: ");
+  Serial.print(anguloX);
+  Serial.print(" | Y: ");
+  Serial.println(anguloY);
+
+  delay(15);
+}
