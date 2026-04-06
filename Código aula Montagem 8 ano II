@@ -1,0 +1,31 @@
+#include <Servo.h>
+
+Servo myServo;
+int sensor = A0;
+bool jaGirou = false; // controla se já executou
+
+void setup() {
+  myServo.attach(9);
+  myServo.write(0);
+  Serial.begin(9600);
+}
+
+void loop() {
+  int umid = analogRead(sensor);
+  Serial.println(umid);
+
+  if (umid < 600 && !jaGirou) {
+    // Gira uma única vez de forma suave
+    for (int pos = 0; pos <= 180; pos++) {
+      myServo.write(pos);
+      delay(15);
+    }
+    jaGirou = true; // marca que já executou
+  }
+  // Opcional: resetar quando voltar ao estado seco
+  if (umid >= 900) {
+    jaGirou = false;
+    myServo.write(0); // volta para posição inicial
+  }
+  delay(100);
+}
