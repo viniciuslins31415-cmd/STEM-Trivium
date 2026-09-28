@@ -1,0 +1,26 @@
+#include <IRremote.hpp>
+#include <AFMotor_R4.h>
+
+AF_DCMotor motor(4);
+const byte RECEPTOR = 16;
+
+void setup() {
+  Serial.begin(9600);
+  IrReceiver.begin(RECEPTOR, ENABLE_LED_FEEDBACK);
+  motor.setSpeed(255);  // velocidade pwm do motor (255 máxima)
+}
+
+void loop() {
+  if (IrReceiver.decode()) {
+
+    unsigned long codigo = IrReceiver.decodedIRData.decodedRawData;
+
+    Serial.println(codigo, HEX);
+
+    if (codigo == 0xBA45FF00) {
+      motor.run(FORWARD);  // motor gira no sentido horário
+    }
+  }
+
+  IrReceiver.resume();
+}
