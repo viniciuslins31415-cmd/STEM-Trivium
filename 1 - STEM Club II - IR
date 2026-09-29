@@ -1,0 +1,22 @@
+#include <IRremote.hpp>
+
+const byte RECEPTOR = 16;
+
+void setup() {
+  Serial.begin(9600);
+  IrReceiver.begin(RECEPTOR, ENABLE_LED_FEEDBACK);
+}
+
+void loop() {
+  if (IrReceiver.decode()) {
+    unsigned long codigo = IrReceiver.decodedIRData.decodedRawData;
+    
+    Serial.println(codigo, HEX);
+    
+    if (codigo == 0xBA45FF00) {
+   
+    }
+  }
+  
+  IrReceiver.resume();
+}
