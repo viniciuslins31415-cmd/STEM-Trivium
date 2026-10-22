@@ -1,0 +1,25 @@
+#include <Servo.h>
+
+Servo servoBase;
+Servo servoBraco;
+
+int eixoX = A0;
+int eixoY = A1;
+
+void setup() {
+  servoBase.attach(9);
+  servoBraco.attach(10);
+}
+
+void loop() {
+  int x = analogRead(eixoX);
+  int y = analogRead(eixoY);
+
+  int anguloBase = map(x, 0, 1023, 0, 180);
+  int anguloBraco = map(y, 0, 1023, 0, 180);
+
+  servoBase.write(anguloBase);
+  servoBraco.write(anguloBraco);
+
+  delay(15);
+}
